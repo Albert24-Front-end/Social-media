@@ -6,13 +6,17 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "json-server --watch src/server/db.json"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
+    "axios": "^1.17.0",
     "firebase": "^12.14.0",
+    "json-server": "^1.0.0-beta.15",
     "tailwindcss": "^4.3.0",
-    "vue": "^3.5.34"
+    "vue": "^3.5.34",
+    "vue-router": "4"
   },
   "devDependencies": {
     "@iconify-json/heroicons": "^1.2.3",
@@ -23,5 +27,9 @@
     "vite": "^8.0.12",
     "vite-plugin-vue-devtools": "^8.1.2",
     "vue-tsc": "^3.2.8"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/Albert24-Front-end/Social-media.git",
+  "author": "Albert <albertaliev777@gmail.com>",
+  "license": "MIT"
 }

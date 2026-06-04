@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Post } from '../App.vue';
+import type { Post } from '../pages/main/index.vue';
 
 const props = defineProps<{
     post: Post
@@ -26,8 +26,8 @@ function toggleFavoured() {
     <div class="flex justify-between items-end p-4 bg-gray-50 border border-gray-100">
         <div>
             <h4 class="mb-2 font-bold text-lg text-gray-700">{{ post.title }}</h4>
-            <div v-if="post.image" class="my-3 overflow-hidden rounded border border-gray-200 max-h-48 flex items-center justify-center bg-white">
-                <img :src="post.image" alt="Post preview" class="w-full h-full object-cover">
+            <div v-if="post.image" class="my-3 overflow-hidden rounded border border-gray-200 max-h-72 flex items-center justify-center bg-white">
+                <img :src="post.image" alt="Post preview" class="max-h-72 object-contain">
             </div>
             <p class="text-sm text-gray-500">{{ post.content }}</p>
         </div>
