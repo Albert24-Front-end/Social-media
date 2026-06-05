@@ -25,7 +25,7 @@ const post = ref<Post>({
 });
 
 onMounted(() => {
-  getPosts();
+  getPosts()
 })
 
 const getPosts = () => {
@@ -34,6 +34,7 @@ const getPosts = () => {
         posts.value = res.data;
         console.log(res.data);
       })
+      .catch(err => console.error("Fetch error:", err))
 }
 
 const storePost = () => {
@@ -42,24 +43,31 @@ const storePost = () => {
   const file = imageInput.value?.files?.[0];
   const imageUrl = file ? URL.createObjectURL(file) : undefined;
 
-  posts.value.unshift({
-    id: Date.now(),
+  const newPostPayload = {
     title: post.value.title,
     content: post.value.content,
     isFavoured: post.value.isFavoured,
     image: imageUrl
-  });
+  };
 
-  Object.assign(post.value, {
-    id: null,
-    title: '',
-    content: '',
-    isFavoured: false,
-    image: ''
-  })
-  if (imageInput.value) {
-    imageInput.value.value = '';
-  }
+  axios.post('http://localhost:3000/posts', newPostPayload)
+      .then(
+        res => {
+          posts.value.unshift(res.data);
+
+          Object.assign(post.value, {
+            id: 0,
+            title: '',
+            content: '',
+            isFavoured: false,
+            image: ''
+          })
+
+          if (imageInput.value) {
+            imageInput.value.value = '';
+          }
+        })
+      .catch(err => console.error("Store error:", err))
 }
 
 const editingPost = ref<Post | null>(null);
@@ -85,26 +93,39 @@ const handleEditImageChange = (event: Event) => {
 const saveEditedPost = () => {
   if (!editingPost.value) return;
 
-  const index = posts.value.findIndex(post => post.id === editingPost.value!.id);
+  axios.put(`http://localhost:3000/posts/${editingPost.value.id}`, editingPost.value)
+      .then(res => {
+        const index = posts.value.findIndex(post => post.id === res.data.id);
 
-  if (index !== -1) {
-    posts.value[index] = editingPost.value;
-  }
+        if (index !== -1) {
+          posts.value[index] = res.data;
+        }
 
-  isEditModalOpen.value = false;
-  editingPost.value = null;
+        isEditModalOpen.value = false;
+        editingPost.value = null;
+      })
+      .catch(err => console.error("Update error:", err))
 }
 
 const deletePost = (post: Post) => {
-  posts.value = posts.value.filter(item => item.id !== post.id);
+  axios.delete(`http://localhost:3000/posts/${post.id}`)
+      .then(() => {
+        posts.value = posts.value.filter(item => item.id !== post.id)
+      })
+      .catch(err => console.error("Update error:", err))
 }
 
 const toggleFavoured = (post: Post) => {
-  const toggledPost = posts.value.find(item => item.id === post.id);
+  const nextFavouredStatus = !post.isFavoured;
 
-  if (toggledPost) {
-    toggledPost.isFavoured = !toggledPost.isFavoured;
-  }
+  axios.patch(`http://localhost:3000/posts/${post.id}`, { isFavoured: nextFavouredStatus })
+      .then(res => {
+        const toggledPost = posts.value.find(item => item.id === res.data.id);
+        if (toggledPost) {
+          toggledPost.isFavoured = res.data.isFavoured;
+        }
+      })
+      .catch(err => console.error("Favoured switch error:", err))
 }
 </script>
 

@@ -1,18 +1,33 @@
 {
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "title": "London",
       "content": "The first picture of the city on my trip to the UK",
       "isFavoured": false,
       "image": "/images/London.jpg"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Paris",
-      "content": "The Notre Dame de Paris",
-      "isFavoured": false,
+      "content": "The Notre-Dame de Paris Cathedral",
+      "isFavoured": true,
       "image": "/images/Depositphotos_117961.jpg"
+    },
+    {
+      "id": "3",
+      "title": "Kazan",
+      "content": "A view of the Kazan Kremlin",
+      "isFavoured": false,
+      "image": "blob:http://localhost:5173/a3bf0206-b964-420e-850f-27dea618f5b1"
+    },
+    {
+      "title": "Bayern",
+      "content": "The Neuschwanstein castle",
+      "isFavoured": true,
+      "image": "blob:http://localhost:5173/7e29b028-f1be-42fb-9020-049017310f1c",
+      "id": "4"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
