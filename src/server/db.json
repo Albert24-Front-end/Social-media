@@ -19,14 +19,21 @@
       "title": "Kazan",
       "content": "A view of the Kazan Kremlin",
       "isFavoured": false,
-      "image": "blob:http://localhost:5173/a3bf0206-b964-420e-850f-27dea618f5b1"
+      "image": "/images/6199.jpg"
     },
     {
       "title": "Bayern",
       "content": "The Neuschwanstein castle",
       "isFavoured": true,
-      "image": "blob:http://localhost:5173/7e29b028-f1be-42fb-9020-049017310f1c",
+      "image": "/images/thumb-1920-538092.jpg",
       "id": "4"
+    },
+    {
+      "title": "Moscow",
+      "content": "The Kremlin, a residence of the evil",
+      "isFavoured": false,
+      "image": "blob:http://localhost:5173/173653e1-718f-4b1d-8d88-581b3df49d22",
+      "id": "tgSoqmsb6XM"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
